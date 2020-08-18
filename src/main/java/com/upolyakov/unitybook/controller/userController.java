@@ -35,13 +35,13 @@ public class userController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(value = "create")
+    @PostMapping()
     public ResponseEntity<?> create(@Validated @RequestBody User user){
         userService.create(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "update/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") int id, @RequestBody User user){
         final boolean update = userService.update(user,id);
         return update
@@ -49,7 +49,7 @@ public class userController {
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @DeleteMapping(value = "delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") int id){
         final boolean delete = userService.delete(id);
         return delete
