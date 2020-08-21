@@ -3,17 +3,20 @@ package com.upolyakov.unitybook.service;
 import com.upolyakov.unitybook.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
+    User register(User user);
+
     void create(User user);
+
+    User findByUsername(String username);
 
     List<User> getAll();
 
-    User getOne(int id);
+    User getOne(long id);
 
-    boolean update(User user, int id);
+    boolean update(User user, long id);
 
-    boolean delete(int id);
+    boolean delete(long id);
 }
