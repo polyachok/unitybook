@@ -1,52 +1,46 @@
 package com.upolyakov.unitybook.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
-import org.apache.logging.log4j.message.Message;
-import org.springframework.lang.NonNull;
+import org.hibernate.validator.constraints.EAN;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class User {
+public class User extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "name")
+    @Column(name = "login")
     @NotEmpty
-    private String name;
+    private String login;
 
+    @Column(name = "password")
+    @NotEmpty
+    private String password;
+
+    @Column(name = "first_name")
+    @NotEmpty
+    private String firstName;
+
+    @Column(name = "last_name")
+    @NotEmpty
+    private String lastName;
 
     @Column(name = "email")
     @NotEmpty
     private String email;
 
-    public Integer getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    private List<Role> roles;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

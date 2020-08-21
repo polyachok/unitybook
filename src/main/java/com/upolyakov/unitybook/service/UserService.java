@@ -11,7 +11,7 @@ public interface UserService {
 
     List<User> getAll();
 
-   User getOne(int id);
+    User getOne(int id);
 
     boolean update(User user, int id);
 
