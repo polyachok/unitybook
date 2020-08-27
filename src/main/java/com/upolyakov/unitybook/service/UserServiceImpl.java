@@ -18,6 +18,9 @@ import java.util.List;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+
+
+
     //TODO не понятки с passwordEncoder в виде Bean
     @Autowired
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
@@ -27,8 +30,13 @@ import java.util.List;
     }
 
     @Override
+    public boolean login(String username, String password) {
+        return false;
+    }
+
+    @Override
     public User register(User user) {
-        Role roleUser = roleRepository.findByname("USER");
+        Role roleUser = roleRepository.findByName("ROLE_USER");
         List<Role> userRoles = new ArrayList<>();
         userRoles.add(roleUser);
 

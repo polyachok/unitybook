@@ -8,6 +8,8 @@ public interface UserService {
 
     User register(User user);
 
+    boolean login(String username, String password);
+
     void create(User user);
 
     User findByUsername(String username);
